@@ -1,0 +1,1 @@
+print([i for i in range(50, 80 + 1, 10)])
