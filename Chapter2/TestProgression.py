@@ -29,4 +29,4 @@ if __name__ == '__main__':
     FibonacciProgression().print_progression(10)
 
     print('Fibonacci progression with start value 4 and 6:')
-    FibonacciProgression(4, 6).print_progression(10)
+    FibonacciProgression(2, 2).print_progression(8)

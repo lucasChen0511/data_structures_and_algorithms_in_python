@@ -1,11 +1,11 @@
 class CreditCard:
 
-    def __init__(self, customer, bank, acnt, limit):
+    def __init__(self, customer, bank, acnt, limit, balance = 0):
         self._customer = customer
         self._bank = bank
         self._account = acnt
         self._limit = limit
-        self._balance = 0
+        self._balance = balance
     
     def get_customer(self):
         return self._customer
@@ -19,14 +19,27 @@ class CreditCard:
         return self._balance
 
     def charge(self, price):
-        if price + self._balance > self._limit:
+        try:
+            price = float(price)
+            if price + self._balance > self._limit:
+                print('Credit card has failed=', self.get_bank())
+            else:
+                self._balance += price
+                return True
+        except:
+            print('Invalid input')
             return False
-        else:
-            self._balance += price
-            return True
         
     def make_payment(self, amount):
-        self._balance -= amount
+        try:
+            amount = float(amount)
+            if amount < 0:
+                raise ValueError('Amount must be positive')
+            self._balance -= amount
+            return True
+        except:
+            print('Invlid input')
+            return False
     
 if __name__ == '__main__':
     wallet = []
@@ -34,7 +47,7 @@ if __name__ == '__main__':
     wallet.append(CreditCard('John', 'Californaia', '3485 0399 3395 1954 3500', 300))
     wallet.append(CreditCard('John', 'Californaia', '5391 0375 9387 5309 5000',1000))
 
-    for val in range(1, 17):
+    for val in range(1, 40):
         wallet[0].charge(val)
         wallet[1].charge(2 * val)
         wallet[2].charge(3 * val)
